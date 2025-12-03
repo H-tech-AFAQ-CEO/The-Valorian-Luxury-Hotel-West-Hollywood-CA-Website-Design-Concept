@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About - The Valorian</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+<style>
+:root {
+--primary-dark: #1a1a1a;
+--primary-light: #fafafa;
+--accent-gold: #c9a961;
+--text-gray: #666;
+--white: #ffffff;
+--transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+
+body {
+font-family: 'Georgia', serif;
+color: var(--primary-dark);
+line-height: 1.6;
+overflow-x: hidden;
+background: var(--primary-light);
+}
+
+html {
+scroll-behavior: smooth;
+}
+
+.header {
+position: fixed;
+top: 0;
+width: 100%;
+z-index: 1000;
+background: rgba(255, 255, 255, 0.98);
+backdrop-filter: blur(10px);
+transition: var(--transition-smooth);
+box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+}
+
+.nav {
+display: flex;
+justify-content: space-between;
+align-items: center;
+padding: 1.5rem 5%;
+max-width: 1400px;
+margin: 0 auto;
+}
+
+.logo {
+font-size: 1.8rem;
+font-weight: 300;
+letter-spacing: 4px;
+color: var(--primary-dark);
+text-transform: uppercase;
+text-decoration: none;
+}
+
+.nav-links {
+display: flex;
+gap: 3rem;
+list-style: none;
+}
+
+.nav-links a {
+color: var(--primary-dark);
+text-decoration: none;
+font-size: 0.9rem;
+letter-spacing: 1px;
+text-transform: uppercase;
+transition: var(--transition-smooth);
+font-family: 'Arial', sans-serif;
+position: relative;
+padding: 0.5rem 0;
+}
+
+.nav-links a::after {
+content: '';
+position: absolute;
+bottom: 0;
+left: 0;
+width: 0;
+height: 1px;
+background: var(--primary-dark);
+transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after {
+width: 100%;
+}
+
+.nav-links a:hover {
+color: var(--accent-gold);
+}
+
+.menu-toggle {
+display: none;
+font-size: 1.5rem;
+cursor: pointer;
+background: none;
+border: none;
+color: var(--primary-dark);
+}
+
+.page-hero {
+height: 60vh;
+position: relative;
+overflow: hidden;
+margin-top: 80px;
+}
+
+.page-hero-image {
+width: 100%;
+height: 100%;
+object-fit: cover;
+filter: brightness(0.7);
+}
+
+.page-hero-overlay {
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background: linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.6));
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+text-align: center;
+color: white;
+padding: 2rem;
+}
+
+.page-hero-content h1 {
+font-size: 4rem;
+font-weight: 300;
+letter-spacing: 10px;
+margin-bottom: 1rem;
+text-transform: uppercase;
+}
+
+.page-hero-content p {
+font-size: 1.3rem;
+letter-spacing: 2px;
+font-weight: 300;
+opacity: 0.95;
+max-width: 700px;
+}
+
+.section {
+padding: 8rem 5%;
+max-width: 1400px;
+margin: 0 auto;
+}
+
+.section-intro {
+text-align: center;
+max-width: 800px;
+margin: 0 auto 6rem;
+}
+
+.section-intro h2 {
+font-size: 2.5rem;
+font-weight: 300;
+letter-spacing: 4px;
+margin-bottom: 1.5rem;
+text-transform: uppercase;
+}
+
+.section-intro p {
+font-size: 1.1rem;
+color: var(--text-gray);
+line-height: 1.8;
+}
+
+.story-section {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 4rem;
+align-items: center;
+margin-bottom: 8rem;
+}
+
+.story-image {
+position: relative;
+overflow: hidden;
+border-radius: 8px;
+box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+}
+
+.story-image img {
+width: 100%;
+height: 100%;
+object-fit: cover;
+transition: transform 0.8s ease;
+}
+
+.story-section:hover .story-image img {
+transform: scale(1.05);
+}
+
+.story-content h3 {
+font-size: 2.5rem;
+font-weight: 300;
+letter-spacing: 3px;
+margin-bottom: 1.5rem;
+text-transform: uppercase;
+}
+
+.story-content p {
+color: var(--text-gray);
+line-height: 1.9;
+margin-bottom: 2rem;
+font-size: 1.05rem;
+}
+
+.philosophy-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+gap: 3rem;
+margin-bottom: 8rem;
+}
+
+.philosophy-card {
+text-align: center;
+padding: 3rem 2rem;
+background: white;
+transition: var(--transition-smooth);
+box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+}
+
+.philosophy-card:hover {
+transform: translateY(-10px);
+box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+}
+
+.philosophy-icon {
+font-size: 3rem;
+color: var(--accent-gold);
+margin-bottom: 1.5rem;
+}
+
+.philosophy-card h4 {
+font-size: 1.2rem;
+letter-spacing: 2px;
+text-transform: uppercase;
+margin-bottom: 1rem;
+font-weight: 400;
+}
+
+.philosophy-card p {
+color: var(--text-gray);
+line-height: 1.8;
+}
+
+.team-section {
+background: #f8f8f8;
+padding: 8rem 5%;
+}
+
+.team-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+gap: 3rem;
+max-width: 1400px;
+margin: 0 auto;
+}
+
+.team-member {
+text-align: center;
+background: white;
+padding: 2rem;
+transition: var(--transition-smooth);
+}
+
+.team-member:hover {
+transform: translateY(-10px);
+box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+}
+
+.team-photo {
+width: 150px;
+height: 150px;
+border-radius: 50%;
+margin: 0 auto 1.5rem;
+overflow: hidden;
+}
+
+.team-photo img {
+width: 100%;
+height: 100%;
+object-fit: cover;
+}
+
+.team-member h4 {
+font-size: 1.1rem;
+letter-spacing: 1px;
+text-transform: uppercase;
+margin-bottom: 0.5rem;
+font-weight: 400;
+}
+
+.team-member p {
+color: var(--accent-gold);
+font-size: 0.9rem;
+margin-bottom: 1rem;
+text-transform: uppercase;
+letter-spacing: 1px;
+}
+
+.team-member .bio {
+color: var(--text-gray);
+font-size: 0.9rem;
+line-height: 1.6;
+}
+
+.cta-button {
+display: inline-block;
+padding: 1.2rem 3rem;
+background: var(--primary-dark);
+color: white;
+text-decoration: none;
+letter-spacing: 2px;
+text-transform: uppercase;
+font-size: 0.9rem;
+transition: var(--transition-smooth);
+border: 2px solid var(--primary-dark);
+border-radius: 4px;
+position: relative;
+overflow: hidden;
+margin-top: 1rem;
+align-self: flex-start;
+}
+
+.cta-button::before {
+content: '';
+position: absolute;
+top: 0;
+left: -100%;
+width: 100%;
+height: 100%;
+background: var(--accent-gold);
+transition: left 0.4s ease;
+z-index: -1;
+}
+
+.cta-button:hover::before {
+left: 0;
+}
+
+.cta-button:hover {
+border-color: var(--accent-gold);
+transform: translateY(-3px);
+box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.cta-section {
+background: var(--primary-dark);
+color: white;
+text-align: center;
+padding: 8rem 5%;
+}
+
+.cta-section h2 {
+font-size: 3rem;
+font-weight: 300;
+letter-spacing: 6px;
+margin-bottom: 1.5rem;
+text-transform: uppercase;
+}
+
+.cta-section p {
+font-size: 1.2rem;
+margin-bottom: 3rem;
+opacity: 0.9;
+}
+
+.cta-button-light {
+background: white;
+color: var(--primary-dark);
+border-color: white;
+}
+
+.cta-button-light:hover {
+background: var(--accent-gold);
+border-color: var(--accent-gold);
+color: white;
+}
+
+.footer {
+background: #0a0a0a;
+color: white;
+padding: 4rem 5%;
+}
+
+.footer-content {
+max-width: 1400px;
+margin: 0 auto;
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+gap: 3rem;
+}
+
+.footer-section h4 {
+font-size: 1.1rem;
+font-weight: 300;
+letter-spacing: 2px;
+margin-bottom: 1.5rem;
+text-transform: uppercase;
+}
+
+.footer-section p,
+.footer-section a {
+color: #999;
+text-decoration: none;
+line-height: 2;
+display: block;
+transition: color 0.3s ease;
+}
+
+.footer-section a:hover {
+color: white;
+}
+
+.social-links {
+display: flex;
+gap: 1.5rem;
+margin-top: 1rem;
+}
+
+.social-links a {
+font-size: 1.3rem;
+}
+
+.footer-bottom {
+text-align: center;
+margin-top: 3rem;
+padding-top: 2rem;
+border-top: 1px solid #333;
+color: #666;
+font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+.nav-links {
+position: fixed;
+top: 0;
+right: -100%;
+height: 100vh;
+width: 70%;
+background: white;
+flex-direction: column;
+padding: 5rem 2rem;
+gap: 2rem;
+transition: right 0.3s ease;
+}
+
+.nav-links.active {
+right: 0;
+}
+
+.menu-toggle {
+display: block;
+}
+
+.page-hero {
+height: 50vh;
+}
+
+.page-hero-content h1 {
+font-size: 2.5rem;
+letter-spacing: 6px;
+}
+
+.page-hero-content p {
+font-size: 1rem;
+}
+
+.section {
+padding: 4rem 5%;
+}
+
+.section-intro h2 {
+font-size: 2rem;
+}
+
+.story-section {
+grid-template-columns: 1fr;
+gap: 2rem;
+}
+
+.philosophy-grid {
+grid-template-columns: 1fr;
+}
+
+.team-grid {
+grid-template-columns: 1fr;
+}
+
+.cta-section h2 {
+font-size: 2rem;
+letter-spacing: 4px;
+}
+
+.footer-content {
+grid-template-columns: 1fr;
+}
+}
+</style>
+</head>
+<body>
+
+<header class="header">
+<nav class="nav">
+<a href="index.html" class="logo">THE VALORIAN</a>
+<ul class="nav-links" id="navLinks">
+<li><a href="index.html">Home</a></li>
+<li><a href="rooms.html">Rooms</a></li>
+<li><a href="experiences.html">Experiences</a></li>
+<li><a href="about.html">About</a></li>
+<li><a href="contact.html">Contact</a></li>
+</ul>
+<button class="menu-toggle" id="menuToggle">
+<i class="fas fa-bars"></i>
+</button>
+</nav>
+</header>
+
+<section class="page-hero">
+<img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1920&q=80" alt="About The Valorian" class="page-hero-image">
+<div class="page-hero-overlay">
+<div class="page-hero-content" data-aos="fade-up">
+<h1>About Us</h1>
+<p>A sanctuary of sophistication where every detail whispers luxury</p>
+</div>
+</div>
+</section>
+
+<section class="section">
+<div class="section-intro" data-aos="fade-up">
+<h2>Our Story</h2>
+<p>The Valorian represents the culmination of a vision to redefine luxury hospitality in West Hollywood. Born from a passion for minimalist design and exceptional service, our hotel stands as a testament to the power of intentional creation.</p>
+</div>
+
+<div class="story-section" data-aos="fade-up">
+<div class="story-image">
+<img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1200&q=80" alt="The Valorian Story">
+</div>
+<div class="story-content">
+<h3>A Vision Realized</h3>
+<p>Founded in 2018, The Valorian emerged from the desire to create a space that transcends the traditional hotel experience. Our founders, inspired by the clean lines of Scandinavian design and the vibrant energy of West Hollywood, envisioned a sanctuary where luxury meets authenticity.</p>
+<p>Every element of The Valorian—from the curated art collection to the bespoke furnishings—was selected with meticulous care. We believe that true luxury lies not in ostentation, but in the subtle perfection of every detail.</p>
+</div>
+</div>
+
+<div class="philosophy-grid">
+<div class="philosophy-card" data-aos="fade-up" data-aos-delay="100">
+<div class="philosophy-icon"><i class="fas fa-lightbulb"></i></div>
+<h4>Design Philosophy</h4>
+<p>Minimalist elegance meets functional beauty. Every space is designed to serve both form and function, creating environments that inspire and rejuvenate.</p>
+</div>
+<div class="philosophy-card" data-aos="fade-up" data-aos-delay="200">
+<div class="philosophy-icon"><i class="fas fa-heart"></i></div>
+<h4>Personalized Service</h4>
+<p>We anticipate needs before they arise, offering genuine hospitality that feels effortless and intuitive.</p>
+</div>
+<div class="philosophy-card" data-aos="fade-up" data-aos-delay="300">
+<div class="philosophy-icon"><i class="fas fa-leaf"></i></div>
+<h4>Sustainable Luxury</h4>
+<p>Our commitment to the environment is woven into every aspect of our operations, from energy-efficient systems to locally sourced materials.</p>
+</div>
+</div>
+</section>
+
+<section class="team-section">
+<div class="section-intro" data-aos="fade-up">
+<h2>Meet Our Team</h2>
+<p>The heart of The Valorian beats through our dedicated team of hospitality professionals, each bringing unique expertise and passion to create unforgettable experiences.</p>
+</div>
+<div class="team-grid">
+<div class="team-member" data-aos="fade-up" data-aos-delay="100">
+<div class="team-photo">
+<img src="https://via.placeholder.com/300x300?text=General+Manager" alt="General Manager">
+</div>
+<h4>Alexander Chen</h4>
+<p>General Manager</p>
+<p class="bio">With over 15 years in luxury hospitality, Alexander oversees every aspect of The Valorian's operations, ensuring our vision of sophisticated luxury is realized in every guest interaction.</p>
+</div>
+<div class="team-member" data-aos="fade-up" data-aos-delay="200">
+<div class="team-photo">
+<img src="https://via.placeholder.com/300x300?text=Executive+Chef" alt="Executive Chef">
+</div>
+<h4>Sarah Mitchell</h4>
+<p>Executive Chef</p>
+<p class="bio">Sarah's culinary philosophy centers on seasonal, locally-sourced ingredients transformed through innovative techniques that celebrate California's diverse food culture.</p>
+</div>
+<div class="team-member" data-aos="fade-up" data-aos-delay="300">
+<div class="team-photo">
+<img src="https://via.placeholder.com/300x300?text=Director+of+Wellness" alt="Director of Wellness">
+</div>
+<h4>Michael Rodriguez</h4>
+<p>Director of Wellness</p>
+<p class="bio">Michael brings a holistic approach to wellness, combining ancient healing traditions with modern science to create transformative spa experiences.</p>
+</div>
+<div class="team-member" data-aos="fade-up" data-aos-delay="400">
+<div class="team-photo">
+<img src="https://via.placeholder.com/300x300?text=Guest+Experience+Manager" alt="Guest Experience Manager">
+</div>
+<h4>Emma Thompson</h4>
+<p>Guest Experience Manager</p>
+<p class="bio">Emma's attention to detail and genuine warmth ensure that every guest's stay is personalized and memorable, turning visitors into lifelong Valorian family members.</p>
+</div>
+</div>
+</section>
+
+<section class="cta-section">
+<div data-aos="fade-up">
+<h2>Experience The Valorian</h2>
+<p>Discover the difference that thoughtful design and genuine hospitality can make</p>
+<a href="rooms.html" class="cta-button cta-button-light">Book Your Stay</a>
+</div>
+</section>
+
+<footer class="footer">
+<div class="footer-content">
+<div class="footer-section">
+<h4>The Valorian</h4>
+<p>Sunset Strip<br>West Hollywood, CA 90069</p>
+<p style="margin-top: 1rem;">reservations@thevallorian.com<br>+1 (310) 555-0100</p>
+</div>
+<div class="footer-section">
+<h4>Quick Links</h4>
+<a href="rooms.html">Rooms & Suites</a>
+<a href="experiences.html">Dining & Bars</a>
+<a href="about.html">About Us</a>
+<a href="contact.html">Contact</a>
+<a href="#">Careers</a>
+</div>
+<div class="footer-section">
+<h4>Connect</h4>
+<div class="social-links">
+<a href="https://instagram.com" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+<a href="https://facebook.com" target="_blank" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+<a href="https://twitter.com" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+<a href="https://linkedin.com" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+</div>
+</div>
+<div class="footer-section">
+<h4>Recognition</h4>
+<p>Five-Star Forbes Travel Guide</p>
+<p>Conde Nast Readers' Choice</p>
+<p>Luxury Hotel Awards 2024</p>
+</div>
+</div>
+<div class="footer-bottom">
+<p>&copy; 2025 The Valorian. All rights reserved. | Privacy Policy | Terms of Service</p>
+</div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script>
+AOS.init({
+duration: 1000,
+once: true,
+offset: 100,
+easing: 'ease-out-cubic'
+});
+</script>
+<script src="js/main.js"></script>
+<script src="js/about.js"></script>
+
+</body>
+</html>

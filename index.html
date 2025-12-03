@@ -1,0 +1,1252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Valorian - West Hollywood Luxury Hotel</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+<link rel="stylesheet" href="css/main.css">
+<link rel="stylesheet" href="css/home.css">
+<style>
+    :root {
+--primary-dark: #1a1a1a;
+--primary-light: #fafafa;
+--accent-gold: #c9a961;
+--text-gray: #666;
+--white: #ffffff;
+--transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+
+body {
+font-family: 'Georgia', serif;
+color: var(--primary-dark);
+line-height: 1.6;
+overflow-x: hidden;
+background: var(--primary-light);
+}
+
+/* Smooth Scrolling */
+html {
+scroll-behavior: smooth;
+}
+
+.header {
+position: fixed;
+top: 0;
+width: 100%;
+z-index: 1000;
+background: rgba(255, 255, 255, 0.95);
+backdrop-filter: blur(10px);
+transition: var(--transition-smooth);
+box-shadow: 0 2px 10px rgba(0,0,0,0);
+}
+
+.header.scrolled {
+background: rgba(255, 255, 255, 0.98);
+box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+}
+
+.nav {
+display: flex;
+justify-content: space-between;
+align-items: center;
+padding: 1.5rem 5%;
+max-width: 1400px;
+margin: 0 auto;
+}
+
+.logo {
+font-size: 1.8rem;
+font-weight: 300;
+letter-spacing: 4px;
+color: #1a1a1a;
+text-transform: uppercase;
+}
+
+.nav-links {
+display: flex;
+gap: 3rem;
+list-style: none;
+}
+
+.nav-links a {
+color: var(--primary-dark);
+text-decoration: none;
+font-size: 0.9rem;
+letter-spacing: 1px;
+text-transform: uppercase;
+transition: var(--transition-smooth);
+font-family: 'Arial', sans-serif;
+position: relative;
+padding: 0.5rem 0;
+}
+
+.nav-links a::after {
+content: '';
+position: absolute;
+bottom: 0;
+left: 0;
+width: 0;
+height: 1px;
+background: var(--primary-dark);
+transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after {
+width: 100%;
+}
+
+.nav-links a:hover {
+color: var(--accent-gold);
+}
+
+.menu-toggle {
+display: none;
+font-size: 1.5rem;
+cursor: pointer;
+background: none;
+border: none;
+color: #1a1a1a;
+}
+
+.hero {
+height: 100vh;
+position: relative;
+overflow: hidden;
+}
+
+.hero-image {
+width: 100%;
+height: 100%;
+object-fit: cover;
+animation: zoomIn 20s ease infinite alternate;
+filter: brightness(0.85);
+}
+
+@keyframes zoomIn {
+0% { transform: scale(1); }
+100% { transform: scale(1.08); }
+}
+
+.hero-overlay {
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.5));
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+text-align: center;
+color: white;
+padding: 2rem;
+}
+
+.hero-content h1 {
+font-size: 5rem;
+font-weight: 300;
+letter-spacing: 12px;
+margin-bottom: 1.5rem;
+text-transform: uppercase;
+animation: fadeInUp 1s ease, float 3s ease-in-out infinite;
+text-shadow: 2px 2px 20px rgba(0,0,0,0.3);
+}
+
+.hero-content p {
+font-size: 1.3rem;
+letter-spacing: 3px;
+margin-bottom: 3rem;
+font-weight: 300;
+animation: fadeInUp 1.2s ease;
+opacity: 0.95;
+}
+
+.hero-scroll-indicator {
+position: absolute;
+bottom: 3rem;
+left: 50%;
+transform: translateX(-50%);
+animation: bounce 2s infinite;
+cursor: pointer;
+color: white;
+font-size: 2rem;
+opacity: 0.7;
+transition: opacity 0.3s ease;
+}
+
+.hero-scroll-indicator:hover {
+opacity: 1;
+}
+
+@keyframes fadeInUp {
+from {
+opacity: 0;
+transform: translateY(40px);
+}
+to {
+opacity: 1;
+transform: translateY(0);
+}
+}
+
+@keyframes float {
+0%, 100% { transform: translateY(0); }
+50% { transform: translateY(-10px); }
+}
+
+@keyframes bounce {
+0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+40% { transform: translateX(-50%) translateY(-10px); }
+60% { transform: translateX(-50%) translateY(-5px); }
+}
+
+.cta-button {
+display: inline-block;
+padding: 1.2rem 3.5rem;
+background: white;
+color: var(--primary-dark);
+text-decoration: none;
+letter-spacing: 2px;
+text-transform: uppercase;
+font-size: 0.9rem;
+transition: var(--transition-smooth);
+border: 2px solid white;
+animation: fadeInUp 1.4s ease;
+position: relative;
+overflow: hidden;
+}
+
+.cta-button::before {
+content: '';
+position: absolute;
+top: 0;
+left: -100%;
+width: 100%;
+height: 100%;
+background: var(--accent-gold);
+transition: left 0.4s ease;
+z-index: -1;
+}
+
+.cta-button:hover::before {
+left: 0;
+}
+
+.cta-button:hover {
+color: white;
+border-color: var(--accent-gold);
+transform: translateY(-3px);
+box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.cta-button-dark {
+background: var(--primary-dark);
+color: white;
+border-color: var(--primary-dark);
+}
+
+.cta-button-dark::before {
+background: var(--accent-gold);
+}
+
+.cta-button-dark:hover {
+border-color: var(--accent-gold);
+}
+
+.section {
+padding: 8rem 5%;
+max-width: 1400px;
+margin: 0 auto;
+}
+
+.section-title {
+font-size: 2.5rem;
+font-weight: 300;
+letter-spacing: 4px;
+text-align: center;
+margin-bottom: 1rem;
+text-transform: uppercase;
+}
+
+.section-subtitle {
+text-align: center;
+font-size: 1.1rem;
+color: #666;
+margin-bottom: 4rem;
+font-style: italic;
+}
+
+.rooms-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+gap: 3rem;
+margin-top: 4rem;
+}
+
+.room-card {
+position: relative;
+overflow: hidden;
+cursor: pointer;
+transition: var(--transition-smooth);
+}
+
+.room-card::before {
+content: '';
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 400px;
+background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.4));
+opacity: 0;
+transition: opacity 0.4s ease;
+z-index: 1;
+}
+
+.room-card:hover::before {
+opacity: 1;
+}
+
+.room-card img {
+width: 100%;
+height: 400px;
+object-fit: cover;
+transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.room-card:hover img {
+transform: scale(1.08);
+}
+
+.room-info {
+padding: 2rem 0;
+}
+
+.room-info h3 {
+font-size: 1.5rem;
+font-weight: 300;
+letter-spacing: 2px;
+margin-bottom: 0.5rem;
+text-transform: uppercase;
+}
+
+.room-info p {
+color: #666;
+line-height: 1.8;
+margin-bottom: 1rem;
+}
+
+.room-link {
+display: inline-block;
+color: var(--primary-dark);
+text-decoration: none;
+letter-spacing: 1px;
+text-transform: uppercase;
+font-size: 0.85rem;
+border-bottom: 1px solid var(--primary-dark);
+transition: var(--transition-smooth);
+position: relative;
+}
+
+.room-link i {
+transition: transform 0.3s ease;
+margin-left: 0.5rem;
+}
+
+.room-link:hover {
+color: var(--accent-gold);
+border-color: var(--accent-gold);
+}
+
+.room-link:hover i {
+transform: translateX(5px);
+}
+
+/* Amenities Section */
+.amenities-section {
+background: white;
+position: relative;
+}
+
+.amenities-grid {
+display: grid;
+grid-template-columns: repeat(4, 1fr);
+gap: 3rem;
+margin-top: 3rem;
+}
+
+.amenity-item {
+text-align: center;
+padding: 2rem;
+transition: var(--transition-smooth);
+}
+
+.amenity-item:hover {
+transform: translateY(-10px);
+}
+
+.amenity-icon {
+font-size: 3rem;
+color: var(--accent-gold);
+margin-bottom: 1.5rem;
+transition: var(--transition-smooth);
+}
+
+.amenity-item:hover .amenity-icon {
+transform: scale(1.1) rotate(5deg);
+}
+
+.amenity-item h4 {
+font-size: 1.1rem;
+font-weight: 400;
+letter-spacing: 1px;
+margin-bottom: 0.75rem;
+text-transform: uppercase;
+}
+
+.amenity-item p {
+color: var(--text-gray);
+font-size: 0.95rem;
+line-height: 1.6;
+}
+
+/* Gallery Section */
+.gallery-section {
+padding: 0;
+max-width: 100%;
+}
+
+.gallery-grid {
+display: grid;
+grid-template-columns: repeat(4, 1fr);
+gap: 0;
+}
+
+.gallery-item {
+position: relative;
+overflow: hidden;
+height: 350px;
+cursor: pointer;
+}
+
+.gallery-item img {
+width: 100%;
+height: 100%;
+object-fit: cover;
+transition: transform 0.6s ease, filter 0.6s ease;
+}
+
+.gallery-item:hover img {
+transform: scale(1.1);
+filter: brightness(0.8);
+}
+
+.gallery-overlay {
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background: rgba(201, 169, 97, 0.9);
+display: flex;
+align-items: center;
+justify-content: center;
+opacity: 0;
+transition: opacity 0.4s ease;
+}
+
+.gallery-item:hover .gallery-overlay {
+opacity: 1;
+}
+
+.gallery-overlay i {
+font-size: 3rem;
+color: white;
+animation: zoomPulse 0.6s ease;
+}
+
+@keyframes zoomPulse {
+0% { transform: scale(0); }
+50% { transform: scale(1.2); }
+100% { transform: scale(1); }
+}
+
+/* Testimonials Section */
+.testimonials-section {
+background: var(--primary-dark);
+color: white;
+text-align: center;
+}
+
+.testimonials-section .section-title {
+color: white;
+}
+
+.testimonials-section .section-subtitle {
+color: rgba(255, 255, 255, 0.7);
+}
+
+.testimonials-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+gap: 3rem;
+margin-top: 4rem;
+}
+
+.testimonial-card {
+padding: 3rem 2rem;
+background: rgba(255, 255, 255, 0.05);
+backdrop-filter: blur(10px);
+border: 1px solid rgba(255, 255, 255, 0.1);
+transition: var(--transition-smooth);
+}
+
+.testimonial-card:hover {
+transform: translateY(-10px);
+background: rgba(255, 255, 255, 0.08);
+border-color: var(--accent-gold);
+}
+
+.testimonial-stars {
+color: var(--accent-gold);
+font-size: 1.2rem;
+margin-bottom: 1.5rem;
+}
+
+.testimonial-text {
+font-size: 1.05rem;
+line-height: 1.8;
+font-style: italic;
+margin-bottom: 2rem;
+color: rgba(255, 255, 255, 0.9);
+}
+
+.testimonial-author {
+font-size: 0.95rem;
+letter-spacing: 1px;
+text-transform: uppercase;
+color: var(--accent-gold);
+}
+
+/* Experience Section Updates */
+.experience-section {
+background: #f5f5f5;
+}
+
+.experience-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+gap: 2rem;
+}
+
+.experience-card {
+background: white;
+overflow: hidden;
+transition: var(--transition-smooth);
+box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+}
+
+.experience-card:hover {
+transform: translateY(-10px);
+box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+}
+
+.experience-card img {
+width: 100%;
+height: 300px;
+object-fit: cover;
+transition: transform 0.6s ease;
+}
+
+.experience-card:hover img {
+transform: scale(1.05);
+}
+
+.experience-content {
+padding: 2rem;
+}
+
+.experience-content h3 {
+font-size: 1.3rem;
+font-weight: 300;
+letter-spacing: 2px;
+margin-bottom: 1rem;
+text-transform: uppercase;
+}
+
+.experience-content p {
+color: #666;
+line-height: 1.8;
+}
+
+.story-section {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 4rem;
+align-items: center;
+}
+
+.story-image {
+width: 100%;
+height: 600px;
+object-fit: cover;
+}
+
+.story-content h2 {
+font-size: 2.5rem;
+font-weight: 300;
+letter-spacing: 3px;
+margin-bottom: 2rem;
+text-transform: uppercase;
+}
+
+.story-content p {
+color: #666;
+line-height: 2;
+margin-bottom: 1.5rem;
+font-size: 1.05rem;
+}
+
+/* Parallax Section */
+.parallax-section {
+height: 60vh;
+background-image: url('https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1920&q=80');
+background-attachment: fixed;
+background-position: center;
+background-repeat: no-repeat;
+background-size: cover;
+position: relative;
+display: flex;
+align-items: center;
+justify-content: center;
+}
+
+.parallax-overlay {
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background: rgba(26, 26, 26, 0.7);
+display: flex;
+align-items: center;
+justify-content: center;
+}
+
+.parallax-content {
+text-align: center;
+color: white;
+max-width: 800px;
+padding: 2rem;
+}
+
+.parallax-content h2 {
+font-size: 3rem;
+font-weight: 300;
+letter-spacing: 6px;
+margin-bottom: 1.5rem;
+text-transform: uppercase;
+}
+
+.parallax-content p {
+font-size: 1.2rem;
+line-height: 1.8;
+margin-bottom: 2rem;
+opacity: 0.95;
+}
+
+/* Location Section */
+.location-section {
+text-align: center;
+background: var(--primary-dark);
+color: white;
+}
+
+.location-content {
+max-width: 800px;
+margin: 0 auto;
+}
+
+.location-icon {
+font-size: 3rem;
+margin-bottom: 2rem;
+opacity: 0.8;
+}
+
+.footer {
+background: #0a0a0a;
+color: white;
+padding: 4rem 5%;
+}
+
+.footer-content {
+max-width: 1400px;
+margin: 0 auto;
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+gap: 3rem;
+}
+
+.footer-section h4 {
+font-size: 1.1rem;
+font-weight: 300;
+letter-spacing: 2px;
+margin-bottom: 1.5rem;
+text-transform: uppercase;
+}
+
+.footer-section p,
+.footer-section a {
+color: #999;
+text-decoration: none;
+line-height: 2;
+display: block;
+transition: color 0.3s ease;
+}
+
+.footer-section a:hover {
+color: white;
+}
+
+.social-links {
+display: flex;
+gap: 1.5rem;
+margin-top: 1rem;
+}
+
+.social-links a {
+font-size: 1.3rem;
+}
+
+.footer-bottom {
+text-align: center;
+margin-top: 3rem;
+padding-top: 2rem;
+border-top: 1px solid #333;
+color: #666;
+font-size: 0.9rem;
+}
+
+/* Newsletter Section */
+.newsletter-section {
+background: var(--accent-gold);
+color: white;
+text-align: center;
+padding: 6rem 5%;
+}
+
+.newsletter-content {
+max-width: 700px;
+margin: 0 auto;
+}
+
+.newsletter-content h3 {
+font-size: 2rem;
+font-weight: 300;
+letter-spacing: 3px;
+margin-bottom: 1rem;
+text-transform: uppercase;
+}
+
+.newsletter-content p {
+font-size: 1.1rem;
+margin-bottom: 2rem;
+opacity: 0.95;
+}
+
+.newsletter-form {
+display: flex;
+gap: 1rem;
+max-width: 500px;
+margin: 0 auto;
+}
+
+.newsletter-input {
+flex: 1;
+padding: 1rem 1.5rem;
+border: 2px solid white;
+background: transparent;
+color: white;
+font-size: 1rem;
+letter-spacing: 1px;
+outline: none;
+transition: var(--transition-smooth);
+}
+
+.newsletter-input::placeholder {
+color: rgba(255, 255, 255, 0.7);
+}
+
+.newsletter-input:focus {
+background: rgba(255, 255, 255, 0.1);
+border-color: white;
+}
+
+.newsletter-button {
+padding: 1rem 2rem;
+background: white;
+color: var(--accent-gold);
+border: 2px solid white;
+font-size: 0.9rem;
+letter-spacing: 1px;
+text-transform: uppercase;
+cursor: pointer;
+transition: var(--transition-smooth);
+font-weight: 600;
+}
+
+.newsletter-button:hover {
+background: transparent;
+color: white;
+transform: translateY(-2px);
+}
+
+/* Fade-in Animation Classes */
+.fade-in {
+opacity: 0;
+transform: translateY(30px);
+transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.fade-in.visible {
+opacity: 1;
+transform: translateY(0);
+}
+
+.slide-left {
+opacity: 0;
+transform: translateX(-50px);
+transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.slide-left.visible {
+opacity: 1;
+transform: translateX(0);
+}
+
+.slide-right {
+opacity: 0;
+transform: translateX(50px);
+transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.slide-right.visible {
+opacity: 1;
+transform: translateX(0);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+.amenities-grid {
+grid-template-columns: repeat(2, 1fr);
+}
+
+.gallery-grid {
+grid-template-columns: repeat(2, 1fr);
+}
+}
+
+@media (max-width: 768px) {
+.nav-links {
+position: fixed;
+top: 0;
+right: -100%;
+height: 100vh;
+width: 70%;
+background: white;
+flex-direction: column;
+padding: 5rem 2rem;
+gap: 2rem;
+transition: right 0.3s ease;
+}
+
+.nav-links.active {
+right: 0;
+}
+
+.menu-toggle {
+display: block;
+}
+
+.hero-content h1 {
+font-size: 2.5rem;
+letter-spacing: 6px;
+}
+
+.hero-content p {
+font-size: 1rem;
+letter-spacing: 2px;
+}
+
+.hero-scroll-indicator {
+bottom: 2rem;
+font-size: 1.5rem;
+}
+
+.section {
+padding: 4rem 5%;
+}
+
+.section-title {
+font-size: 1.8rem;
+}
+
+.story-section {
+grid-template-columns: 1fr;
+}
+
+.story-image {
+height: 400px;
+}
+
+.rooms-grid {
+grid-template-columns: 1fr;
+}
+
+.amenities-grid {
+grid-template-columns: 1fr;
+gap: 2rem;
+}
+
+.gallery-grid {
+grid-template-columns: 1fr;
+}
+
+.gallery-item {
+height: 250px;
+}
+
+.testimonials-grid {
+grid-template-columns: 1fr;
+}
+
+.parallax-section {
+background-attachment: scroll;
+height: 50vh;
+}
+
+.parallax-content h2 {
+font-size: 2rem;
+letter-spacing: 4px;
+}
+
+.newsletter-form {
+flex-direction: column;
+}
+
+.newsletter-button {
+width: 100%;
+}
+
+.footer-content {
+grid-template-columns: 1fr;
+gap: 2rem;
+}
+}
+</style>
+</head>
+<body>
+
+<header class="header">
+<nav class="nav">
+<div class="logo">THE VALORIAN</div>
+<ul class="nav-links" id="navLinks">
+<li><a href="index.html">Home</a></li>
+<li><a href="rooms.html">Rooms</a></li>
+<li><a href="experiences.html">Experiences</a></li>
+<li><a href="about.html">About</a></li>
+<li><a href="contact.html">Contact</a></li>
+</ul>
+<button class="menu-toggle" id="menuToggle">
+<i class="fas fa-bars"></i>
+</button>
+</nav>
+</header>
+
+<section class="hero">
+<img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1920&q=80" alt="The Valorian Hotel" class="hero-image">
+<div class="hero-overlay">
+<div class="hero-content">
+<h1>THE VALORIAN</h1>
+<p>A Dreamlike Escape on the Sunset Strip</p>
+<a href="https://www.marriott.com" target="_blank" class="cta-button">Book Now</a>
+</div>
+<div class="hero-scroll-indicator">
+<i class="fas fa-chevron-down"></i>
+</div>
+</div>
+</section>
+
+<section class="section" id="rooms">
+<h2 class="section-title">Rooms & Suites</h2>
+<p class="section-subtitle">Refined elegance meets ethereal comfort</p>
+<div class="rooms-grid">
+<div class="room-card">
+<img src="https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=800&q=80" alt="Deluxe Room">
+<div class="room-info">
+<h3>Deluxe Room</h3>
+<p>Contemporary luxury with city views. A serene sanctuary of white tones and refined details.</p>
+<a href="#" class="room-link">View Details <i class="fas fa-arrow-right"></i></a>
+</div>
+</div>
+<div class="room-card">
+<img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800&q=80" alt="Premier Suite">
+<div class="room-info">
+<h3>Premier Suite</h3>
+<p>Expansive spaces where sophistication meets dreamlike tranquility. Indulge in elevated living.</p>
+<a href="#" class="room-link">View Details <i class="fas fa-arrow-right"></i></a>
+</div>
+</div>
+<div class="room-card">
+<img src="https://images.unsplash.com/photo-1618773928121-c32242e63f39?w=800&q=80" alt="Penthouse Suite">
+<div class="room-info">
+<h3>Penthouse Suite</h3>
+<p>The pinnacle of luxury. Panoramic views of West Hollywood from your private sanctuary.</p>
+<a href="#" class="room-link">View Details <i class="fas fa-arrow-right"></i></a>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Amenities Section -->
+<section class="section amenities-section">
+<h2 class="section-title" data-aos="fade-up">Exceptional Amenities</h2>
+<p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">Every detail crafted for your comfort</p>
+<div class="amenities-grid">
+<div class="amenity-item" data-aos="fade-up" data-aos-delay="100">
+<div class="amenity-icon">
+<i class="fas fa-swimming-pool"></i>
+</div>
+<h4>Rooftop Pool</h4>
+<p>Infinity-edge pool with panoramic city views and private cabanas</p>
+</div>
+<div class="amenity-item" data-aos="fade-up" data-aos-delay="200">
+<div class="amenity-icon">
+<i class="fas fa-spa"></i>
+</div>
+<h4>Spa & Wellness</h4>
+<p>Full-service spa featuring signature treatments and holistic therapies</p>
+</div>
+<div class="amenity-item" data-aos="fade-up" data-aos-delay="300">
+<div class="amenity-icon">
+<i class="fas fa-dumbbell"></i>
+</div>
+<h4>Fitness Studio</h4>
+<p>State-of-the-art equipment and personal training available 24/7</p>
+</div>
+<div class="amenity-item" data-aos="fade-up" data-aos-delay="400">
+<div class="amenity-icon">
+<i class="fas fa-concierge-bell"></i>
+</div>
+<h4>Concierge</h4>
+<p>Personalized service to curate your perfect West Hollywood experience</p>
+</div>
+</div>
+</section>
+
+<section class="section experience-section" id="experiences">
+<h2 class="section-title">Experiences</h2>
+<p class="section-subtitle">Where every moment becomes a memory</p>
+<div class="experience-grid">
+<div class="experience-card">
+<img src="https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=800&q=80" alt="Rooftop Bar">
+<div class="experience-content">
+<h3><i class="fas fa-glass-martini-alt"></i> Rooftop Bar</h3>
+<p>Elevated mixology under the stars. Experience signature cocktails with breathtaking Sunset Strip views.</p>
+</div>
+</div>
+<div class="experience-card">
+<img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&q=80" alt="Dining">
+<div class="experience-content">
+<h3><i class="fas fa-utensils"></i> Fine Dining</h3>
+<p>A culinary journey that mirrors our aesthetic. Refined, contemporary, unforgettable.</p>
+</div>
+</div>
+<div class="experience-card">
+<img src="https://images.unsplash.com/photo-1555854877-bab0e564b8d5?w=800&q=80" alt="West Hollywood">
+<div class="experience-content">
+<h3><i class="fas fa-city"></i> West Hollywood</h3>
+<p>Step into the heart of the Sunset Strip. Culture, nightlife, and creativity at your doorstep.</p>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Gallery Section -->
+<section class="gallery-section">
+<div class="gallery-grid">
+<div class="gallery-item" data-aos="zoom-in" data-aos-delay="100">
+<img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800&q=80" alt="Hotel Lobby">
+<div class="gallery-overlay">
+<i class="fas fa-search-plus"></i>
+</div>
+</div>
+<div class="gallery-item" data-aos="zoom-in" data-aos-delay="200">
+<img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&q=80" alt="Hotel Exterior">
+<div class="gallery-overlay">
+<i class="fas fa-search-plus"></i>
+</div>
+</div>
+<div class="gallery-item" data-aos="zoom-in" data-aos-delay="300">
+<img src="https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=800&q=80" alt="Guest Room">
+<div class="gallery-overlay">
+<i class="fas fa-search-plus"></i>
+</div>
+</div>
+<div class="gallery-item" data-aos="zoom-in" data-aos-delay="400">
+<img src="https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=800&q=80" alt="Rooftop Bar">
+<div class="gallery-overlay">
+<i class="fas fa-search-plus"></i>
+</div>
+</div>
+</div>
+</section>
+
+<section class="section" id="story">
+<div class="story-section">
+<img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=800&q=80" alt="The Valorian Story" class="story-image">
+<div class="story-content">
+<h2>Our Story</h2>
+<p>Rising above the Sunset Strip, The Valorian is a fever dream in white — a seductive collision of fantasy and fame. Within its translucent walls, glamour hides danger and pleasure flirts with consequence.</p>
+<p>It's a place where creativity, confidence, and desire intertwine — a modern temple for those who live between light and shadow. Cross the threshold and time seems to slow, as if you've followed a White Rabbit into a world where rules dissolve and beauty bends.</p>
+<p>Refined yet untamed, The Valorian invites guests to drift beyond reality, where every reflection hints at another world. Here, allure is the rule, and transcendence is always one drink — or one glance — away.</p>
+</div>
+</div>
+</section>
+
+<!-- Parallax Section -->
+<section class="parallax-section">
+<div class="parallax-overlay">
+<div class="parallax-content" data-aos="fade-up">
+<h2>Where Luxury Meets Legend</h2>
+<p>Experience the intersection of timeless elegance and contemporary West Hollywood culture. Every moment at The Valorian is designed to transcend the ordinary.</p>
+<a href="about.html" class="cta-button">Discover Our Story</a>
+</div>
+</div>
+</section>
+
+<!-- Testimonials Section -->
+<section class="section testimonials-section">
+<h2 class="section-title" data-aos="fade-up">Guest Experiences</h2>
+<p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">Stories from those who've discovered The Valorian</p>
+<div class="testimonials-grid">
+<div class="testimonial-card" data-aos="fade-up" data-aos-delay="100">
+<div class="testimonial-stars">
+<i class="fas fa-star"></i>
+<i class="fas fa-star"></i>
+<i class="fas fa-star"></i>
+<i class="fas fa-star"></i>
+<i class="fas fa-star"></i>
+</div>
+<p class="testimonial-text">"The Valorian redefined luxury for me. From the moment I stepped into the lobby, I felt transported to another world. The attention to detail is simply extraordinary."</p>
+<p class="testimonial-author">— Sarah Mitchell, Los Angeles</p>
+</div>
+<div class="testimonial-card" data-aos="fade-up" data-aos-delay="200">
+<div class="testimonial-stars">
+<i class="fas fa-star"></i>
+<i class="fas fa-star"></i>
+<i class="fas fa-star"></i>
+<i class="fas fa-star"></i>
+<i class="fas fa-star"></i>
+</div>
+<p class="testimonial-text">"An absolute gem on the Sunset Strip. The rooftop bar is unmatched, and the service makes you feel like Hollywood royalty. Can't wait to return."</p>
+<p class="testimonial-author">— James Rodriguez, New York</p>
+</div>
+<div class="testimonial-card" data-aos="fade-up" data-aos-delay="300">
+<div class="testimonial-stars">
+<i class="fas fa-star"></i>
+<i class="fas fa-star"></i>
+<i class="fas fa-star"></i>
+<i class="fas fa-star"></i>
+<i class="fas fa-star"></i>
+</div>
+<p class="testimonial-text">"Every corner of The Valorian is Instagram-worthy, but it's the genuine warmth and impeccable taste that truly sets this hotel apart. A must-visit destination."</p>
+<p class="testimonial-author">— Emily Chen, San Francisco</p>
+</div>
+</div>
+</section>
+
+<section class="section location-section" id="location">
+<div class="location-content">
+<div class="location-icon">
+<i class="fas fa-map-marker-alt"></i>
+</div>
+<h2 class="section-title">West Hollywood</h2>
+<p class="section-subtitle">Sunset Strip, Los Angeles, California</p>
+<p style="line-height: 2; margin-bottom: 2rem;" data-aos="fade-up" data-aos-delay="200">At the crossroads of creativity and luxury, where Hollywood's energy meets refined sophistication.</p>
+<a href="https://maps.google.com" target="_blank" class="cta-button" data-aos="fade-up" data-aos-delay="300">Get Directions</a>
+</div>
+</section>
+
+<!-- Newsletter Section -->
+<section class="newsletter-section">
+<div class="newsletter-content" data-aos="fade-up">
+<h3>Stay Connected</h3>
+<p>Subscribe to receive exclusive offers and updates from The Valorian</p>
+<form class="newsletter-form" data-aos="fade-up" data-aos-delay="100">
+<input type="email" class="newsletter-input" placeholder="Enter your email address" required>
+<button type="submit" class="newsletter-button">Subscribe</button>
+</form>
+</div>
+</section>
+
+<footer class="footer" id="contact">
+<div class="footer-content">
+<div class="footer-section">
+<h4>The Valorian</h4>
+<p>Sunset Strip<br>West Hollywood, CA 90069</p>
+<p style="margin-top: 1rem;">reservations@thevallorian.com<br>+1 (310) 555-0100</p>
+</div>
+<div class="footer-section">
+<h4>Quick Links</h4>
+<a href="rooms.html">Rooms & Suites</a>
+<a href="experiences.html">Dining & Bars</a>
+<a href="about.html">About Us</a>
+<a href="contact.html">Contact</a>
+<a href="#">Careers</a>
+</div>
+<div class="footer-section">
+<h4>Connect</h4>
+<div class="social-links">
+<a href="https://instagram.com" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+<a href="https://facebook.com" target="_blank" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+<a href="https://twitter.com" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+<a href="https://linkedin.com" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+</div>
+</div>
+<div class="footer-section">
+<h4>Recognition</h4>
+<p>Five-Star Forbes Travel Guide</p>
+<p>Conde Nast Readers' Choice</p>
+<p>Luxury Hotel Awards 2024</p>
+</div>
+</div>
+<div class="footer-bottom">
+<p>&copy; 2025 The Valorian. All rights reserved. | Privacy Policy | Terms of Service</p>
+</div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script>
+// Initialize AOS (Animate On Scroll)
+AOS.init({
+duration: 1000,
+once: true,
+offset: 100,
+easing: 'ease-out-cubic'
+});
+</script>
+<script src="js/main.js"></script>
+<script src="js/home.js"></script>
+
+</body>
+</html>

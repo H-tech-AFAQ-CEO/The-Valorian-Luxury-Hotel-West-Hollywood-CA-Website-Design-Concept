@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact - The Valorian</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+<style>
+:root {
+--primary-dark: #1a1a1a;
+--primary-light: #fafafa;
+--accent-gold: #c9a961;
+--text-gray: #666;
+--white: #ffffff;
+--transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+body {
+font-family: 'Georgia', serif;
+color: var(--primary-dark);
+line-height: 1.6;
+overflow-x: hidden;
+background: var(--primary-light);
+}
+
+html {
+scroll-behavior: smooth;
+}
+
+.header {
+position: fixed;
+top: 0;
+width: 100%;
+z-index: 1000;
+background: rgba(255, 255, 255, 0.98);
+backdrop-filter: blur(10px);
+transition: var(--transition-smooth);
+box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+}
+
+.nav {
+display: flex;
+justify-content: space-between;
+align-items: center;
+padding: 1.5rem 5%;
+max-width: 1400px;
+margin: 0 auto;
+}
+
+.logo {
+font-size: 1.8rem;
+font-weight: 300;
+letter-spacing: 4px;
+color: var(--primary-dark);
+text-transform: uppercase;
+text-decoration: none;
+}
+
+.nav-links {
+display: flex;
+gap: 3rem;
+list-style: none;
+}
+
+.nav-links a {
+color: var(--primary-dark);
+text-decoration: none;
+font-size: 0.9rem;
+letter-spacing: 1px;
+text-transform: uppercase;
+transition: var(--transition-smooth);
+font-family: 'Arial', sans-serif;
+position: relative;
+padding: 0.5rem 0;
+}
+
+.nav-links a::after {
+content: '';
+position: absolute;
+bottom: 0;
+left: 0;
+width: 0;
+height: 1px;
+background: var(--primary-dark);
+transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after {
+width: 100%;
+}
+
+.nav-links a:hover {
+color: var(--accent-gold);
+}
+
+.menu-toggle {
+display: none;
+font-size: 1.5rem;
+cursor: pointer;
+background: none;
+border: none;
+color: var(--primary-dark);
+}
+
+.page-hero {
+height: 60vh;
+position: relative;
+overflow: hidden;
+margin-top: 80px;
+}
+
+.page-hero-image {
+width: 100%;
+height: 100%;
+object-fit: cover;
+filter: brightness(0.7);
+}
+
+.page-hero-overlay {
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background: linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.6));
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+text-align: center;
+color: white;
+padding: 2rem;
+}
+
+.page-hero-content h1 {
+font-size: 4rem;
+font-weight: 300;
+letter-spacing: 10px;
+margin-bottom: 1rem;
+text-transform: uppercase;
+}
+
+.page-hero-content p {
+font-size: 1.3rem;
+letter-spacing: 2px;
+font-weight: 300;
+opacity: 0.95;
+max-width: 700px;
+}
+
+.section {
+padding: 8rem 5%;
+max-width: 1400px;
+margin: 0 auto;
+}
+
+.section-intro {
+text-align: center;
+max-width: 800px;
+margin: 0 auto 6rem;
+}
+
+.section-intro h2 {
+font-size: 2.5rem;
+font-weight: 300;
+letter-spacing: 4px;
+margin-bottom: 1.5rem;
+text-transform: uppercase;
+}
+
+.section-intro p {
+font-size: 1.1rem;
+color: var(--text-gray);
+line-height: 1.8;
+}
+
+.contact-grid {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 4rem;
+margin-bottom: 8rem;
+}
+
+.contact-info {
+background: white;
+padding: 4rem;
+box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+}
+
+.contact-info h3 {
+font-size: 2rem;
+font-weight: 300;
+letter-spacing: 3px;
+margin-bottom: 2rem;
+text-transform: uppercase;
+}
+
+.contact-item {
+display: flex;
+align-items: flex-start;
+gap: 1.5rem;
+margin-bottom: 2rem;
+}
+
+.contact-icon {
+font-size: 1.5rem;
+color: var(--accent-gold);
+margin-top: 0.25rem;
+}
+
+.contact-item h4 {
+font-size: 1rem;
+letter-spacing: 1px;
+text-transform: uppercase;
+margin-bottom: 0.5rem;
+font-weight: 400;
+}
+
+.contact-item p {
+color: var(--text-gray);
+line-height: 1.6;
+}
+
+.contact-form {
+background: white;
+padding: 4rem;
+box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+}
+
+.form-group {
+margin-bottom: 2rem;
+}
+
+.form-group label {
+display: block;
+font-size: 0.9rem;
+letter-spacing: 1px;
+text-transform: uppercase;
+margin-bottom: 0.75rem;
+font-weight: 400;
+color: var(--text-gray);
+}
+
+.form-group input,
+.form-group textarea {
+width: 100%;
+padding: 1rem;
+border: 1px solid #eee;
+background: #fafafa;
+font-family: 'Georgia', serif;
+font-size: 1rem;
+transition: var(--transition-smooth);
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+outline: none;
+border-color: var(--accent-gold);
+background: white;
+}
+
+.form-group textarea {
+resize: vertical;
+min-height: 150px;
+}
+
+.cta-button {
+display: inline-block;
+padding: 1.2rem 3rem;
+background: var(--primary-dark);
+color: white;
+text-decoration: none;
+letter-spacing: 2px;
+text-transform: uppercase;
+font-size: 0.9rem;
+transition: var(--transition-smooth);
+border: 2px solid var(--primary-dark);
+position: relative;
+overflow: hidden;
+margin-top: 1rem;
+}
+
+.cta-button::before {
+content: '';
+position: absolute;
+top: 0;
+left: -100%;
+width: 100%;
+height: 100%;
+background: var(--accent-gold);
+transition: left 0.4s ease;
+z-index: -1;
+}
+
+.cta-button:hover::before {
+left: 0;
+}
+
+.cta-button:hover {
+border-color: var(--accent-gold);
+transform: translateY(-3px);
+box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.map-section {
+background: #f8f8f8;
+padding: 8rem 5%;
+text-align: center;
+}
+
+.map-container {
+max-width: 1200px;
+margin: 0 auto;
+border-radius: 8px;
+overflow: hidden;
+box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+}
+
+.map-container iframe {
+width: 100%;
+height: 400px;
+border: none;
+}
+
+.footer {
+background: #0a0a0a;
+color: white;
+padding: 4rem 5%;
+}
+
+.footer-content {
+max-width: 1400px;
+margin: 0 auto;
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+gap: 3rem;
+}
+
+.footer-section h4 {
+font-size: 1.1rem;
+font-weight: 300;
+letter-spacing: 2px;
+margin-bottom: 1.5rem;
+text-transform: uppercase;
+}
+
+.footer-section p,
+.footer-section a {
+color: #999;
+text-decoration: none;
+line-height: 2;
+display: block;
+transition: color 0.3s ease;
+}
+
+.footer-section a:hover {
+color: white;
+}
+
+.social-links {
+display: flex;
+gap: 1.5rem;
+margin-top: 1rem;
+}
+
+.social-links a {
+font-size: 1.3rem;
+}
+
+.footer-bottom {
+text-align: center;
+margin-top: 3rem;
+padding-top: 2rem;
+border-top: 1px solid #333;
+color: #666;
+font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+.nav-links {
+position: fixed;
+top: 0;
+right: -100%;
+height: 100vh;
+width: 70%;
+background: white;
+flex-direction: column;
+padding: 5rem 2rem;
+gap: 2rem;
+transition: right 0.3s ease;
+}
+
+.nav-links.active {
+right: 0;
+}
+
+.menu-toggle {
+display: block;
+}
+
+.page-hero {
+height: 50vh;
+}
+
+.page-hero-content h1 {
+font-size: 2.5rem;
+letter-spacing: 6px;
+}
+
+.page-hero-content p {
+font-size: 1rem;
+}
+
+.section {
+padding: 4rem 5%;
+}
+
+.section-intro h2 {
+font-size: 2rem;
+}
+
+.contact-grid {
+grid-template-columns: 1fr;
+gap: 2rem;
+}
+
+.contact-info,
+.contact-form {
+padding: 2rem;
+}
+
+.map-container iframe {
+height: 300px;
+}
+
+.footer-content {
+grid-template-columns: 1fr;
+}
+}
+</style>
+</head>
+<body>
+
+<header class="header">
+<nav class="nav">
+<a href="index.html" class="logo">THE VALORIAN</a>
+<ul class="nav-links" id="navLinks">
+<li><a href="index.html">Home</a></li>
+<li><a href="rooms.html">Rooms</a></li>
+<li><a href="experiences.html">Experiences</a></li>
+<li><a href="about.html">About</a></li>
+<li><a href="contact.html">Contact</a></li>
+</ul>
+<button class="menu-toggle" id="menuToggle">
+<i class="fas fa-bars"></i>
+</button>
+</nav>
+</header>
+
+<section class="page-hero">
+<img src="https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=1920&q=80" alt="Contact The Valorian" class="page-hero-image">
+<div class="page-hero-overlay">
+<div class="page-hero-content" data-aos="fade-up">
+<h1>Contact Us</h1>
+<p>We're here to make your experience extraordinary</p>
+</div>
+</div>
+</section>
+
+<section class="section">
+<div class="section-intro" data-aos="fade-up">
+<h2>Get In Touch</h2>
+<p>Whether you're planning a stay, have questions about our services, or need assistance with reservations, our team is ready to help. Reach out to us through any of the channels below.</p>
+</div>
+
+<div class="contact-grid">
+<div class="contact-info" data-aos="fade-up">
+<h3>Visit Us</h3>
+<div class="contact-item">
+<div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+<div>
+<h4>Address</h4>
+<p>The Valorian<br>Sunset Strip<br>West Hollywood, CA 90069<br>United States</p>
+</div>
+</div>
+<div class="contact-item">
+<div class="contact-icon"><i class="fas fa-phone"></i></div>
+<div>
+<h4>Phone</h4>
+<p>Reservations: +1 (310) 555-0100<br>Concierge: +1 (310) 555-0101<br>Spa: +1 (310) 555-0102</p>
+</div>
+</div>
+<div class="contact-item">
+<div class="contact-icon"><i class="fas fa-envelope"></i></div>
+<div>
+<h4>Email</h4>
+<p>Reservations: reservations@thevallorian.com<br>General: info@thevallorian.com<br>Press: press@thevallorian.com</p>
+</div>
+</div>
+<div class="contact-item">
+<div class="contact-icon"><i class="fas fa-clock"></i></div>
+<div>
+<h4>Hours</h4>
+<p>Front Desk: 24/7<br>Concierge: 6:00 AM - 11:00 PM<br>Housekeeping: 8:00 AM - 8:00 PM</p>
+</div>
+</div>
+</div>
+
+<div class="contact-form" data-aos="fade-up">
+<h3>Send a Message</h3>
+<form action="#" method="post">
+<div class="form-group">
+<label for="name">Name</label>
+<input type="text" id="name" name="name" required>
+</div>
+<div class="form-group">
+<label for="email">Email</label>
+<input type="email" id="email" name="email" required>
+</div>
+<div class="form-group">
+<label for="phone">Phone</label>
+<input type="tel" id="phone" name="phone">
+</div>
+<div class="form-group">
+<label for="subject">Subject</label>
+<input type="text" id="subject" name="subject" required>
+</div>
+<div class="form-group">
+<label for="message">Message</label>
+<textarea id="message" name="message" required></textarea>
+</div>
+<button type="submit" class="cta-button">Send Message</button>
+</form>
+</div>
+</div>
+</section>
+
+<section class="map-section">
+<div data-aos="fade-up">
+<h2>Find Us</h2>
+<h3>Located in the heart of West Hollywood's Sunset Strip</h3>
+<div class="map-container">
+<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d423286.274034471!2d-118.741382!3d34.020039!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80c2c75ddc27da13%3A0xe22fdf6f254608f4!2sWest%20Hollywood%2C%20CA%2C%20USA!5e0!3m2!1sen!2s!4v1633020000000!5m2!1sen!2s" allowfullscreen="" loading="lazy"></iframe>
+</div>
+</div>
+</section>
+
+<footer class="footer">
+<div class="footer-content">
+<div class="footer-section">
+<h4>The Valorian</h4>
+<p>Sunset Strip<br>West Hollywood, CA 90069</p>
+<p style="margin-top: 1rem;">reservations@thevallorian.com<br>+1 (310) 555-0100</p>
+</div>
+<div class="footer-section">
+<h4>Quick Links</h4>
+<a href="rooms.html">Rooms & Suites</a>
+<a href="experiences.html">Dining & Bars</a>
+<a href="about.html">About Us</a>
+<a href="contact.html">Contact</a>
+<a href="#">Careers</a>
+</div>
+<div class="footer-section">
+<h4>Connect</h4>
+<div class="social-links">
+<a href="https://instagram.com" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+<a href="https://facebook.com" target="_blank" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+<a href="https://twitter.com" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+<a href="https://linkedin.com" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+</div>
+</div>
+<div class="footer-section">
+<h4>Recognition</h4>
+<p>Five-Star Forbes Travel Guide</p>
+<p>Conde Nast Readers' Choice</p>
+<p>Luxury Hotel Awards 2024</p>
+</div>
+</div>
+<div class="footer-bottom">
+<p>&copy; 2025 The Valorian. All rights reserved. | Privacy Policy | Terms of Service</p>
+</div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script>
+AOS.init({
+duration: 1000,
+once: true,
+offset: 100,
+easing: 'ease-out-cubic'
+});
+</script>
+<script src="js/main.js"></script>
+<script src="js/contact.js"></script>
+
+</body>
+</html>

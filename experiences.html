@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Experiences - The Valorian</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+<style>
+:root {
+--primary-dark: #1a1a1a;
+--primary-light: #fafafa;
+--accent-gold: #c9a961;
+--text-gray: #666;
+--white: #ffffff;
+--transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+
+body {
+font-family: 'Georgia', serif;
+color: var(--primary-dark);
+line-height: 1.6;
+overflow-x: hidden;
+background: var(--primary-light);
+}
+
+html {
+scroll-behavior: smooth;
+}
+
+.header {
+position: fixed;
+top: 0;
+width: 100%;
+z-index: 1000;
+background: rgba(255, 255, 255, 0.98);
+backdrop-filter: blur(10px);
+transition: var(--transition-smooth);
+box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+}
+
+.nav {
+display: flex;
+justify-content: space-between;
+align-items: center;
+padding: 1.5rem 5%;
+max-width: 1400px;
+margin: 0 auto;
+}
+
+.logo {
+font-size: 1.8rem;
+font-weight: 300;
+letter-spacing: 4px;
+color: var(--primary-dark);
+text-transform: uppercase;
+text-decoration: none;
+}
+
+.nav-links {
+display: flex;
+gap: 3rem;
+list-style: none;
+}
+
+.nav-links a {
+color: var(--primary-dark);
+text-decoration: none;
+font-size: 0.9rem;
+letter-spacing: 1px;
+text-transform: uppercase;
+transition: var(--transition-smooth);
+font-family: 'Arial', sans-serif;
+position: relative;
+padding: 0.5rem 0;
+}
+
+.nav-links a::after {
+content: '';
+position: absolute;
+bottom: 0;
+left: 0;
+width: 0;
+height: 1px;
+background: var(--primary-dark);
+transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after {
+width: 100%;
+}
+
+.nav-links a:hover {
+color: var(--accent-gold);
+}
+
+.menu-toggle {
+display: none;
+font-size: 1.5rem;
+cursor: pointer;
+background: none;
+border: none;
+color: var(--primary-dark);
+}
+
+.page-hero {
+height: 70vh;
+position: relative;
+overflow: hidden;
+margin-top: 80px;
+}
+
+.page-hero-image {
+width: 100%;
+height: 100%;
+object-fit: cover;
+filter: brightness(0.6);
+}
+
+.page-hero-overlay {
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.6));
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+text-align: center;
+color: white;
+padding: 2rem;
+}
+
+.page-hero-content h1 {
+font-size: 4.5rem;
+font-weight: 300;
+letter-spacing: 12px;
+margin-bottom: 1.5rem;
+text-transform: uppercase;
+}
+
+.page-hero-content p {
+font-size: 1.4rem;
+letter-spacing: 2px;
+font-weight: 300;
+opacity: 0.95;
+max-width: 800px;
+line-height: 1.8;
+}
+
+.section {
+padding: 8rem 5%;
+max-width: 1400px;
+margin: 0 auto;
+}
+
+.section-intro {
+text-align: center;
+max-width: 800px;
+margin: 0 auto 6rem;
+}
+
+.section-intro h2 {
+font-size: 2.8rem;
+font-weight: 300;
+letter-spacing: 5px;
+margin-bottom: 1.5rem;
+text-transform: uppercase;
+}
+
+.section-intro p {
+font-size: 1.15rem;
+color: var(--text-gray);
+line-height: 1.9;
+}
+
+/* Editorial Card Layouts */
+.editorial-grid {
+display: grid;
+gap: 0;
+margin-bottom: 8rem;
+}
+
+.editorial-card {
+position: relative;
+overflow: hidden;
+background: white;
+transition: var(--transition-smooth);
+}
+
+.editorial-card-large {
+display: grid;
+grid-template-columns: 1fr 1fr;
+min-height: 650px;
+}
+
+.editorial-card-large:nth-child(even) .editorial-image {
+order: 2;
+}
+
+.editorial-card-large:nth-child(even) .editorial-content {
+order: 1;
+}
+
+.editorial-image {
+position: relative;
+overflow: hidden;
+height: 100%;
+min-height: 650px;
+}
+
+.editorial-image img {
+width: 100%;
+height: 100%;
+object-fit: cover;
+transition: transform 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.editorial-card:hover .editorial-image img {
+transform: scale(1.08);
+}
+
+.editorial-content {
+padding: 6rem;
+display: flex;
+flex-direction: column;
+justify-content: center;
+background: white;
+}
+
+.editorial-category {
+font-size: 0.8rem;
+letter-spacing: 3px;
+text-transform: uppercase;
+color: var(--accent-gold);
+margin-bottom: 1.5rem;
+font-weight: 400;
+}
+
+.editorial-content h3 {
+font-size: 3rem;
+font-weight: 300;
+letter-spacing: 4px;
+margin-bottom: 2rem;
+text-transform: uppercase;
+line-height: 1.2;
+}
+
+.editorial-description {
+font-size: 1.1rem;
+color: var(--text-gray);
+line-height: 1.9;
+margin-bottom: 2rem;
+}
+
+.editorial-features {
+list-style: none;
+margin: 2rem 0;
+padding: 2rem 0;
+border-top: 1px solid #eee;
+border-bottom: 1px solid #eee;
+}
+
+.editorial-features li {
+padding: 0.75rem 0;
+font-size: 1rem;
+color: var(--text-gray);
+display: flex;
+align-items: center;
+gap: 1rem;
+}
+
+.editorial-features li i {
+color: var(--accent-gold);
+font-size: 0.85rem;
+}
+
+.editorial-card-medium {
+display: grid;
+grid-template-columns: 1.2fr 1fr;
+min-height: 500px;
+background: #f8f8f8;
+}
+
+.editorial-card-medium .editorial-image {
+min-height: 500px;
+}
+
+.editorial-card-medium .editorial-content {
+padding: 4rem;
+background: #f8f8f8;
+}
+
+.editorial-card-medium h3 {
+font-size: 2.2rem;
+}
+
+.editorial-quote {
+font-size: 1.3rem;
+font-style: italic;
+color: var(--primary-dark);
+line-height: 1.8;
+margin: 2rem 0;
+padding-left: 2rem;
+border-left: 3px solid var(--accent-gold);
+}
+
+.editorial-hours {
+display: grid;
+grid-template-columns: repeat(2, 1fr);
+gap: 2rem;
+margin-top: 2rem;
+}
+
+.hours-item {
+padding: 1.5rem;
+background: white;
+border: 1px solid #eee;
+}
+
+.hours-item h5 {
+font-size: 0.9rem;
+letter-spacing: 1px;
+text-transform: uppercase;
+margin-bottom: 0.75rem;
+font-weight: 400;
+}
+
+.hours-item p {
+color: var(--text-gray);
+font-size: 0.95rem;
+}
+
+.cta-button {
+display: inline-block;
+padding: 1.2rem 3rem;
+background: var(--primary-dark);
+color: white;
+text-decoration: none;
+letter-spacing: 2px;
+text-transform: uppercase;
+font-size: 0.85rem;
+transition: var(--transition-smooth);
+border: 2px solid var(--primary-dark);
+position: relative;
+overflow: hidden;
+margin-top: 1.5rem;
+align-self: flex-start;
+}
+
+.cta-button::before {
+content: '';
+position: absolute;
+top: 0;
+left: -100%;
+width: 100%;
+height: 100%;
+background: var(--accent-gold);
+transition: left 0.4s ease;
+z-index: -1;
+}
+
+.cta-button:hover::before {
+left: 0;
+}
+
+.cta-button:hover {
+border-color: var(--accent-gold);
+transform: translateY(-3px);
+box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+/* Full Width Image Section */
+.full-width-image {
+height: 70vh;
+position: relative;
+overflow: hidden;
+}
+
+.full-width-image img {
+width: 100%;
+height: 100%;
+object-fit: cover;
+}
+
+.image-overlay {
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background: rgba(26, 26, 26, 0.5);
+display: flex;
+align-items: center;
+justify-content: center;
+}
+
+.image-overlay-content {
+text-align: center;
+color: white;
+max-width: 700px;
+padding: 2rem;
+}
+
+.image-overlay-content h3 {
+font-size: 3rem;
+font-weight: 300;
+letter-spacing: 6px;
+margin-bottom: 1.5rem;
+text-transform: uppercase;
+}
+
+.image-overlay-content p {
+font-size: 1.2rem;
+line-height: 1.8;
+opacity: 0.95;
+}
+
+/* Neighborhood Section */
+.neighborhood-section {
+background: var(--primary-dark);
+color: white;
+padding: 8rem 5%;
+}
+
+.neighborhood-grid {
+display: grid;
+grid-template-columns: repeat(3, 1fr);
+gap: 3rem;
+max-width: 1400px;
+margin: 3rem auto 0;
+}
+
+.neighborhood-card {
+text-align: center;
+padding: 2rem;
+background: rgba(255, 255, 255, 0.05);
+backdrop-filter: blur(10px);
+border: 1px solid rgba(255, 255, 255, 0.1);
+transition: var(--transition-smooth);
+}
+
+.neighborhood-card:hover {
+transform: translateY(-10px);
+background: rgba(255, 255, 255, 0.08);
+border-color: var(--accent-gold);
+}
+
+.neighborhood-icon {
+font-size: 3rem;
+color: var(--accent-gold);
+margin-bottom: 1.5rem;
+}
+
+.neighborhood-card h4 {
+font-size: 1.2rem;
+font-weight: 400;
+letter-spacing: 2px;
+margin-bottom: 1rem;
+text-transform: uppercase;
+}
+
+.neighborhood-card p {
+color: rgba(255, 255, 255, 0.8);
+line-height: 1.8;
+}
+
+.footer {
+background: #0a0a0a;
+color: white;
+padding: 4rem 5%;
+}
+
+.footer-content {
+max-width: 1400px;
+margin: 0 auto;
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+gap: 3rem;
+}
+
+.footer-section h4 {
+font-size: 1.1rem;
+font-weight: 300;
+letter-spacing: 2px;
+margin-bottom: 1.5rem;
+text-transform: uppercase;
+}
+
+.footer-section p,
+.footer-section a {
+color: #999;
+text-decoration: none;
+line-height: 2;
+display: block;
+transition: color 0.3s ease;
+}
+
+.footer-section a:hover {
+color: white;
+}
+
+.social-links {
+display: flex;
+gap: 1.5rem;
+margin-top: 1rem;
+}
+
+.social-links a {
+font-size: 1.3rem;
+}
+
+.footer-bottom {
+text-align: center;
+margin-top: 3rem;
+padding-top: 2rem;
+border-top: 1px solid #333;
+color: #666;
+font-size: 0.9rem;
+}
+
+@media (max-width: 968px) {
+.editorial-card-large,
+.editorial-card-medium {
+grid-template-columns: 1fr;
+}
+
+.editorial-card-large:nth-child(even) .editorial-image,
+.editorial-card-large:nth-child(even) .editorial-content {
+order: 0;
+}
+
+.editorial-image {
+min-height: 450px;
+}
+
+.editorial-content {
+padding: 3rem;
+}
+
+.editorial-content h3 {
+font-size: 2rem;
+}
+
+.editorial-hours {
+grid-template-columns: 1fr;
+}
+
+.neighborhood-grid {
+grid-template-columns: 1fr;
+}
+}
+
+@media (max-width: 768px) {
+.nav-links {
+position: fixed;
+top: 0;
+right: -100%;
+height: 100vh;
+width: 70%;
+background: white;
+flex-direction: column;
+padding: 5rem 2rem;
+gap: 2rem;
+transition: right 0.3s ease;
+}
+
+.nav-links.active {
+right: 0;
+}
+
+.menu-toggle {
+display: block;
+}
+
+.page-hero {
+height: 60vh;
+}
+
+.page-hero-content h1 {
+font-size: 2.5rem;
+letter-spacing: 6px;
+}
+
+.page-hero-content p {
+font-size: 1.1rem;
+}
+
+.section {
+padding: 4rem 5%;
+}
+
+.section-intro h2 {
+font-size: 2rem;
+letter-spacing: 3px;
+}
+
+.editorial-content {
+padding: 2rem;
+}
+
+.editorial-content h3 {
+font-size: 1.8rem;
+letter-spacing: 2px;
+}
+
+.editorial-quote {
+font-size: 1.1rem;
+margin: 1.5rem 0;
+padding-left: 1rem;
+}
+
+.full-width-image {
+height: 50vh;
+}
+
+.image-overlay-content h3 {
+font-size: 2rem;
+letter-spacing: 4px;
+}
+
+.image-overlay-content p {
+font-size: 1rem;
+}
+
+.footer-content {
+grid-template-columns: 1fr;
+}
+}
+</style>
+</head>
+<body>
+
+<header class="header">
+<nav class="nav">
+<a href="index.html" class="logo">THE VALORIAN</a>
+<ul class="nav-links" id="navLinks">
+<li><a href="index.html">Home</a></li>
+<li><a href="rooms.html">Rooms</a></li>
+<li><a href="experiences.html">Experiences</a></li>
+<li><a href="about.html">About</a></li>
+<li><a href="contact.html">Contact</a></li>
+</ul>
+<button class="menu-toggle" id="menuToggle">
+<i class="fas fa-bars"></i>
+</button>
+</nav>
+</header>
+
+<section class="page-hero">
+<img src="https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=1920&q=80" alt="The Valorian Experiences" class="page-hero-image">
+<div class="page-hero-overlay">
+<div class="page-hero-content" data-aos="fade-up">
+<h1>Experiences</h1>
+<p>Where every moment is crafted to transcend the ordinary, from rooftop sunsets to culinary journeys that linger in memory</p>
+</div>
+</div>
+</section>
+
+<section class="section">
+<div class="section-intro" data-aos="fade-up">
+<h2>Curated Moments</h2>
+<p>The Valorian is more than a destination—it's a collection of experiences that define modern luxury on the Sunset Strip. Each offering is designed with the same editorial sensibility that defines our aesthetic: refined, intentional, unforgettable.</p>
+</div>
+
+<!-- Rooftop Bar Editorial Card -->
+<div class="editorial-card editorial-card-large" data-aos="fade-up">
+<div class="editorial-image">
+<img src="https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=1200&q=80" alt="Rooftop Bar">
+</div>
+<div class="editorial-content">
+<p class="editorial-category">Elevated Mixology</p>
+<h3>The Rooftop</h3>
+<p class="editorial-description">Perched above the pulse of West Hollywood, our rooftop bar is where the city skyline becomes your backdrop and every cocktail is a work of art. As the sun sets over the Sunset Strip, the space transforms into an intimate sanctuary of sophisticated indulgence.</p>
+<p class="editorial-quote">"Here, the boundary between reality and reverie dissolves with each sip."</p>
+<ul class="editorial-features">
+<li><i class="fas fa-check"></i> Signature cocktails by award-winning mixologists</li>
+<li><i class="fas fa-check"></i> 360-degree views of Los Angeles</li>
+<li><i class="fas fa-check"></i> Live DJ performances Thursday - Saturday</li>
+<li><i class="fas fa-check"></i> Private cabanas available for reservation</li>
+<li><i class="fas fa-check"></i> Curated wine & champagne selection</li>
+</ul>
+<div class="editorial-hours">
+<div class="hours-item">
+<h5>Summer Hours</h5>
+<p>5:00 PM - 1:00 AM<br>Daily</p>
+</div>
+<div class="hours-item">
+<h5>Happy Hour</h5>
+<p>5:00 PM - 7:00 PM<br>Monday - Friday</p>
+</div>
+</div>
+<a href="https://www.opentable.com" target="_blank" class="cta-button">Reserve a Table</a>
+</div>
+</div>
+
+<!-- Fine Dining Editorial Card -->
+<div class="editorial-card editorial-card-large" data-aos="fade-up">
+<div class="editorial-image">
+<img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1200&q=80" alt="Fine Dining">
+</div>
+<div class="editorial-content">
+<p class="editorial-category">Contemporary Cuisine</p>
+<h3>Essence Restaurant</h3>
+<p class="editorial-description">A culinary journey that mirrors The Valorian's design philosophy—minimalist presentation with maximum impact. Chef Alexandra Chen creates seasonal menus that celebrate California's bounty through refined techniques and unexpected combinations.</p>
+<p class="editorial-quote">"Each dish is a meditation on flavor, texture, and beauty."</p>
+<ul class="editorial-features">
+<li><i class="fas fa-check"></i> Farm-to-table seasonal menu</li>
+<li><i class="fas fa-check"></i> Chef's tasting menu available</li>
+<li><i class="fas fa-check"></i> Extensive wine cellar with sommelier service</li>
+<li><i class="fas fa-check"></i> Private dining room for up to 16 guests</li>
+<li><i class="fas fa-check"></i> Open kitchen design</li>
+</ul>
+<div class="editorial-hours">
+<div class="hours-item">
+<h5>Dinner Service</h5>
+<p>6:00 PM - 10:00 PM<br>Tuesday - Sunday</p>
+</div>
+<div class="hours-item">
+<h5>Weekend Brunch</h5>
+<p>10:00 AM - 2:00 PM<br>Saturday & Sunday</p>
+</div>
+</div>
+<a href="https://www.opentable.com" target="_blank" class="cta-button">Make a Reservation</a>
+</div>
+</div>
+
+<!-- Lobby Bar Editorial Card -->
+<div class="editorial-card editorial-card-medium" data-aos="fade-up">
+<div class="editorial-image">
+<img src="https://images.unsplash.com/photo-1572116469696-31de0f17cc34?w=1200&q=80" alt="Lobby Bar">
+</div>
+<div class="editorial-content">
+<p class="editorial-category">All-Day Gathering</p>
+<h3>The Lobby</h3>
+<p class="editorial-description">Where morning espresso transitions seamlessly to evening aperitifs. The Lobby serves as The Valorian's social heart—a space designed for spontaneous encounters and lingering conversations.</p>
+<ul class="editorial-features">
+<li><i class="fas fa-check"></i> Artisan coffee & pastries</li>
+<li><i class="fas fa-check"></i> Light bites & small plates</li>
+<li><i class="fas fa-check"></i> Classic cocktails reimagined</li>
+<li><i class="fas fa-check"></i> Afternoon tea service</li>
+</ul>
+<a href="https://www.opentable.com" target="_blank" class="cta-button">Visit Us</a>
+</div>
+</div>
+
+<!-- Spa & Wellness Editorial Card -->
+<div class="editorial-card editorial-card-medium" data-aos="fade-up">
+<div class="editorial-image">
+<img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=1200&q=80" alt="Spa & Wellness">
+</div>
+<div class="editorial-content">
+<p class="editorial-category">Wellness Sanctuary</p>
+<h3>The Spa</h3>
+<p class="editorial-description">A haven of tranquility featuring bespoke treatments that combine ancient healing traditions with modern wellness science. Every detail designed to restore, rejuvenate, and transcend.</p>
+<ul class="editorial-features">
+<li><i class="fas fa-check"></i> Signature massage therapies</li>
+<li><i class="fas fa-check"></i> Organic facial treatments</li>
+<li><i class="fas fa-check"></i> Private couples suites</li>
+<li><i class="fas fa-check"></i> Infrared sauna & steam room</li>
+</ul>
+<a href="#" class="cta-button">Book Treatment</a>
+</div>
+</div>
+</section>
+
+<!-- Full Width Image Break -->
+<section class="full-width-image" data-aos="fade-up">
+<img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1920&q=80" alt="The Valorian">
+<div class="image-overlay">
+<div class="image-overlay-content">
+<h3>Where Dreams Take Form</h3>
+<p>Every experience at The Valorian is designed to blur the line between fantasy and reality, creating moments that linger long after you leave.</p>
+</div>
+</div>
+</section>
+
+<!-- Neighborhood Section -->
+<section class="neighborhood-section">
+<div class="section-intro" data-aos="fade-up">
+<h2>West Hollywood Awaits</h2>
+<p>Step outside our doors and into the heart of LA's most vibrant neighborhood. The Sunset Strip, world-class dining, iconic entertainment venues, and Beverly Hills shopping are all within reach.</p>
+</div>
+<div class="neighborhood-grid">
+<div class="neighborhood-card" data-aos="fade-up" data-aos-delay="100">
+<div class="neighborhood-icon"><i class="fas fa-music"></i></div>
+<h4>Live Music</h4>
+<p>Legendary venues like The Roxy, Whisky a Go Go, and The Troubadour are minutes away.</p>
+</div>
+<div class="neighborhood-card" data-aos="fade-up" data-aos-delay="200">
+<div class="neighborhood-icon"><i class="fas fa-shopping-bag"></i></div>
+<h4>Luxury Shopping</h4>
+<p>Rodeo Drive and Melrose Avenue offer world-renowned fashion and design boutiques.</p>
+</div>
+<div class="neighborhood-card" data-aos="fade-up" data-aos-delay="300">
+<div class="neighborhood-icon"><i class="fas fa-palette"></i></div>
+<h4>Arts & Culture</h4>
+<p>LACMA, The Getty, and countless galleries showcase the city's creative spirit.</p>
+</div>
+<div class="neighborhood-card" data-aos="fade-up" data-aos-delay="400">
+<div class="neighborhood-icon"><i class="fas fa-utensils"></i></div>
+<h4>Culinary Scene</h4>
+<p>From Michelin-starred restaurants to hidden gems, LA's dining culture is unparalleled.</p>
+</div>
+<div class="neighborhood-card" data-aos="fade-up" data-aos-delay="500">
+<div class="neighborhood-icon"><i class="fas fa-film"></i></div>
+<h4>Entertainment</h4>
+<p>Hollywood studios, historic theaters, and premiere events define the neighborhood.</p>
+</div>
+<div class="neighborhood-card" data-aos="fade-up" data-aos-delay="600">
+<div class="neighborhood-icon"><i class="fas fa-moon"></i></div>
+<h4>Nightlife</h4>
+<p>Exclusive clubs and cocktail lounges make West Hollywood legendary after dark.</p>
+</div>
+</div>
+</section>
+
+<footer class="footer">
+<div class="footer-content">
+<div class="footer-section">
+<h4>The Valorian</h4>
+<p>Sunset Strip<br>West Hollywood, CA 90069</p>
+<p style="margin-top: 1rem;">reservations@thevallorian.com<br>+1 (310) 555-0100</p>
+</div>
+<div class="footer-section">
+<h4>Quick Links</h4>
+<a href="rooms.html">Rooms & Suites</a>
+<a href="experiences.html">Dining & Bars</a>
+<a href="about.html">About Us</a>
+<a href="contact.html">Contact</a>
+<a href="#">Careers</a>
+</div>
+<div class="footer-section">
+<h4>Connect</h4>
+<div class="social-links">
+<a href="https://instagram.com" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+<a href="https://facebook.com" target="_blank" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+<a href="https://twitter.com" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+<a href="https://linkedin.com" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+</div>
+</div>
+<div class="footer-section">
+<h4>Recognition</h4>
+<p>Five-Star Forbes Travel Guide</p>
+<p>Conde Nast Readers' Choice</p>
+<p>Luxury Hotel Awards 2024</p>
+</div>
+</div>
+<div class="footer-bottom">
+<p>&copy; 2025 The Valorian. All rights reserved. | Privacy Policy | Terms of Service</p>
+</div>
+</footer>
+
+<script>
+const menuToggle = document.getElementById('menuToggle');
+const navLinks = document.getElementById('navLinks');
+
+menuToggle.addEventListener('click', () => {
+navLinks.classList.toggle('active');
+});
+
+document.querySelectorAll('.nav-links a').forEach(link => {
+link.addEventListener('click', () => {
+navLinks.classList.remove('active');
+});
+});
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script>
+AOS.init({
+duration: 1000,
+once: true,
+offset: 100,
+easing: 'ease-out-cubic'
+});
+</script>
+
+</body>
+</html>
